@@ -30,3 +30,6 @@ As with each University of Auckland, there is a core set of capabilities aimed t
 - Labs	-  10%
 - Test	-  10%
 - **Total - 100%**
+
+### A Statistical Meme :smiley:
+![STATS MEME](https://www.siliconrepublic.com/wp-content/uploads/2015/10/Statistician_memes_10.png)
