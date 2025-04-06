@@ -1,0 +1,137 @@
+---
+title: "Project2"
+author: "Felix Tasker-Erceg"
+subheading: "STATS 220 Semester One 2024"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+
+```{css}
+body {
+  font-family: "Times New Roman";
+  color: white;
+  background-color: #000000;
+}
+
+```
+
+## **Introduction**
+
+
+#### **What I decided to focus on**
+The human behavior I decided to focus upon in this report was Exercise. Primarily, although in an admittedly limited manner, I wanted to focus on the expectation of our own personal exercise we place on ourselves. To explain further, many individuals place hefty exercise goals, and perceive they should be doing more than they are. The opposite can also be true however, where individuals believe they are doing more than they are.
+
+My aim was to judge the expectations individuals had of themselves for exercise vs what that had completed that week. I attempted to achieve this with only 5 questions, using information all individuals could find on their mobile device. Additionally, I also sought what exercises they completed to correlate to the data I collected. This would allow me to observe the human behavior that different exercises could possibly have on hours exercised vs hours they wanted to exercise.
+
+#### **Guidelines**
+The Guideline I would like to discuss is using validation rules for responses. By using validation rules on my questions concerning hours of exercise - I can produce "tidy" data from the very beginning. This removes the hassle of "cleaning" the data. 
+
+I tried to indroduce this response validation in a way that wouldn't introduce bias or make it harmful for people responding. To do this I gave the option of submitting any number of hours above 0. 
+
+#### **How my data would analyse changes**
+My data would collect week to week information on a persons expectations of themselves (concerning exercise), and how expectations would change for themselves. 
+
+For example, for the question concerning how many hours would you like to have exercised this week, I could see how an individuals desire to exercise might change over short periods of time. Another possible example for a different question is the perception of how many steps they had averaged per day on their health. Would this align with how many steps they though they had done? Would this change week to week? 
+Further, if I added an additional question related to ones mood of that week, or the time of filling that form, would that affect the data they input week to week? Changing how they perceive the exercise they have done or should do?
+
+#### **Link to Google Form:** 
+https://docs.google.com/forms/d/e/1FAIpQLSesUSku11GCeAqvCkoJ4XYZ6X0TGXvt3zCYdRK8nvtpZpD6qg/viewform?usp=sf_link
+
+
+
+## **Analytics**
+#### **Static Statements**
+- There is a notable discrepancy between the desired and actual hours of exercise reported by some participants, suggesting potential challenges in meeting personal fitness goals. For example the total number of hours all the participants completed each week was 71, but the total number of desired hours they wanted to complete was 118.
+
+- The most commonly reported types of exercises are walking (with 11) and strength training (with 8), highlighting their popularity among the forms participants.
+
+- There is a discrepancy between the perceived average number of steps participants believe they take per day and the actual steps recorded by fitness trackers or health apps, indicating potential inaccuracies in self-assessment or awareness of physical activity levels. This can be shown by a scatterplot.
+
+
+
+```{r Exploration RChunk}
+csv_file <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIdf2T_PjzNrB8myuTttYQCgz8dnEFykALSwOm9uqET7oW6MLZ8UBM4hx6uiQCmceiyskGmBXqaC0p/pub?output=csv"
+
+learning_data <- read_csv(csv_file)
+
+learning_data <- learning_data %>% 
+                  rename(`Hrs of Exercise` = `How many hours of exercise have you done this week in total?`,
+                         `Hrs Desired` = `How many hours of exercise did you hope/would have liked to have done this week in total?`,
+                         `Steps Estimate` = `Without checking any sort of step counting device, what is the average number of steps you believe you take per day this week?`,
+                         `Steps Counted` = `Now, using either information recorded by your fitness tracker, or the health app on your phone - navigate to your daily average steps. How many steps does this say your daily average is this week?`,
+                         `Exercises` = `Of these listed types of exercise, select all that you have engaged in this week.`)
+
+learning_data
+
+total_hours_of_exercise <- learning_data %>%
+  summarise(total_hours_of_exercise = sum(`Hrs of Exercise`))
+
+total_hours_of_desired <- learning_data %>%
+  summarise(total_hours_of_desired = sum(`Hrs Desired`))
+
+output_text <- paste("Total reported hours of exercise:", total_hours_of_exercise$total_hours_of_exercise, "hours.",
+                    "Total hours desired to be completed per week:", round(total_hours_of_desired$total_hours_of_desired))
+
+print(output_text)
+
+
+
+#GGplot explore graph #1
+hours_count <- learning_data %>%
+  group_by(`Hrs of Exercise`) %>%
+  summarise(count = n())
+
+ggplot(hours_count, aes(x = reorder(`Hrs of Exercise`, count), y = count)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  theme_minimal() +
+  labs(title = "Distribution of Hours of Exercise Done by Participants",
+       x = "Hours of Exercise",
+       y = "Number of Participants") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+#GGplot explore graph #2
+exercise_freq <- learning_data %>%
+  separate_rows(Exercises, sep = ", ") %>%
+  group_by(Exercises) %>%
+  summarise(count = n())
+
+ggplot(exercise_freq, aes(x = Exercises, y = count, fill = Exercises)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Frequency of Different Exercise Types",
+       x = "Exercise Types",
+       y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+
+## **Creativity**
+#### **In this project, creativity is shown through various components:**
+
+- Data Response Validation and Transformation: Rather than just summarizing the data, I proactively cleaned and it initially to ensure accuracy and suitability for analysis.
+
+- Advanced Data Visualization Techniques: I employed advanced visualization techniques like bar charts to present the data in an informative and visually appealing way. By selecting suitable visualization methods, such as making it colorful, my goal was to effectively communicate the relationships and patterns within the data.
+
+- Statistical Analysis: Apart from basic summaries, I delved into deeper statistical analysis to reveal meaningful insights from the data. This included identifying disparities between perceived and recorded steps, shedding light on potential inaccuracies in self-assessment or awareness of physical activity levels.
+
+- Custom Code Development: I created customized code for data manipulation, visualization, and analysis. While utilizing techniques from Module 2, I also explored additional functionalities and packages to enhance the analysis beyond the specified requirements.
+
+Overall, by surpassing the fundamental expectations and infusing creativity into various project elements, my aim was to deliver a comprehensive and enlightening report that not only fulfills the objectives but also demonstrates understanding and application of data analysis techniques taught in this class.
+
+## **Learning reflection**
+#### **Something I learned from Module 2**
+
+Building on my last lesson, time management is crucial for projects. I once again thought my growing knowledge in this class would be enough to complete the project in a few days. This was very difficult for me as I was moving house and failed to manage my time correctly.
+
+However, actually from Module 2 I am learning how versatile a language this is. The multitude of packages you can install provide so much possible application and it is furthering my curiosity in web design. I have also come to understand the importance of creating my statistical questions. I believe I could have possibly thought about those more before sharing my form with friends and family.
+
+![](end meme image.jpg)

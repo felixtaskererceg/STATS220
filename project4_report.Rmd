@@ -1,0 +1,67 @@
+---
+title: "Project 4"
+author: "Felix Tasker-Erceg"
+date: "2024-05-03"
+output: html_document
+subtitle: "Visualising data about videos from the YouTube channels Kurzgesagt and Vox"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{css echo=FALSE}
+body {
+  font-family: "Georgia";
+  background-color: #f2e6bf; /* Background color */
+  color: #794A3A; /* Text color */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #794A3A; /* Heading text color */
+}
+
+p {
+  color: #794A3A; /* Paragraph text color */
+}
+```
+
+## Introduction
+#### Why I chose these channels...
+I chose these two YouTube channels as I wanted to explore channels I watch myself. I also wanted the channels to be similar in production so I could analyse how possible choices they make that are present in the data may affect the channel as a whole. This is because if the channels produced completely different topics, the insights I found in the data may be due to the topic and viewers. Basically I believed it would be more isolated.
+
+#### My two ideas before creating the visualisations...
+One thing that heavily interested me before going in (for some reason), was if there was any correlation between the length of a title of a video and the length of the video overall. My question was - "Would a longer titled video need more time to explain the topic the title described?". The second interest I had was seeing the relationship of likes and views across both channels. Before visualisations I saw that Kurzgesagt seemed to have many more likes per video than Vox seemed to. I considered adding another data point to the data collected in the sheet. The data point would be if the creator of the video asked the user to like the video -  but this would mean I would have had to have watced the 200 videos in my data set. Which is simply not feasible.
+
+#### My process for creating the visualisations...
+The process for these visualisations was long. This topic really intrigued me - so I wanted to keep adding visualisations to the R folder to see if I could observe or find anything else interesting in the data. This meant I often built on other plots I had already created. For example, I created a dot plot charting the view to like ratio of a video for each channel. I noticed a steeper correlation for Kurzgesagt, which led me to wonder if I summed both variables, would this steeper correlation be quite strong. I chose the variation in chart types as I believed that would give me the best insight into the data. I tried to compare a whole bunch of variables that didnt work too. Often this was due to not knowing how to solve a coding problem. But one case is the relationship between the title length and video length - this did not turn out how I expected, so I changed it to a dot plot. 
+
+## Dynamic data story
+#### My dynamic data story...
+![data_story](data_story.gif)
+
+#### How my dynamic data story demonstrates creativity...
+I really enjoy visual design. So this new, more solid and viscous way of creating a visually pleasing page was a great challenge. I themed the whole story around a retro/70's theme. This required an insane amount of time adjusting small images using image_composite() and the offset argument of the magick package funtion. The retro theme matched the custom theme I downloaded for the plot after doing research to find one that matched the image I had in my head. Further, I included a piece of retro tech in the corner of each image for visuals, as well as a retro page splitter to make a more seamless section between the page of text and the graphs. I am very proud of what I produced. It took many hours. I also went above and beyond with the number of plots as I really enjoyed exploring the data in this project. 
+
+Also, REMOVING THE BACKGROUNDS OF ALL THE IMAGES SO IT WOULDNT LOOK AWFUL AFTER COMPOSITE. This probably took the most time, until I found a website that did it automatically... (big sigh).
+
+
+## Learning reflection
+#### One important idea I learned from module 4B...
+4B has been my favorite module so far. I feel like I can fully manage and manipulate data for the visualisations now. The takeaway I enjoyed the most was the ordering of data we focused on in the task. I found this very exciting and it was great to implement into my project. 
+I also have to acknowledge that I finally got my time management correct (barely).
+
+#### Things I want to explore further... 
+I am very excited to explore further design elements in languages that can analyse data. I find that without visual support, data often bores people, which I find a shame. I think with good presentation we can inform those interested on a topic even better than if it was presented bare bones. It's like putting cheese sauce on broccoli - only makes it better in my opinion.
+
+#### Things I taught myslef...
+I really wanted to make the sides of the graphs present nicely and not have scientific notation - so I used the scale package to make sure it was presented well. I also used a theme that I researched so it would match the retro theme I had in my head. I also had to learn how to tilt the text, as the words in the top 10 overlapped.
+
+## Appendix
+```{r file='visualisations.R', eval=FALSE, echo=TRUE}
+
+```
+
+```{r file='data_story.R', eval=FALSE, echo=TRUE}
+
+```

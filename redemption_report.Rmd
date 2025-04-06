@@ -1,0 +1,93 @@
+---
+title: "Redemption Project"
+author: "Felix Tasker-Erceg"
+date: "2024-05-27"
+subtitle: "Reddeming those marks! (Hopefully)"
+output:
+  html_document:
+    code_folding: hide
+---
+
+
+```{css echo=FALSE}
+body {
+  font-family: "Georgia";
+  background-color: #F8F4E1; /* Background color */
+  color: #74512D; /* Text color */
+}
+
+h1{
+  color: #543310; /* Heading text color */
+}
+
+h2{
+  color: #543310; /* Heading text color */
+}
+
+p {
+  color: #AF8F6F; /* Paragraph text color */
+}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+## Project Focus
+#### Why I chose this topic...
+I chose to web scrape data from one of my favorite book review sites, and see if I could observe anything of interest in the data. The site I chose was GoodReads. It holds many reviews from thousands of readers and groups them together to gather data from those people of almost every book available on the Amazon Store (GoodReads is owned by Amazon). Mindblowingly, I did project 5 on IMDb, another review site which is also owned by Amazon. I was not aware that either GoodReads or IMDb were owned by Amazon before starting these respective projects.
+
+To continue, I chose this topic as I am an avid reader and wanted to delve into the statistics available on GoodReads, and see if I could find anything interesting from what I scraped there. I used the information that I scraped from the site (more information for that in the comments of the R file I used to scrape the code) to create visualizations of the data that I gathered.
+
+## Which project I lost the marks from and why I lost the mark
+#### Why I lost the first mark...
+The first mark I focused on was from *Project2*, where I did not use the **rename()** function the way it was demonstrated in the lab task. 
+
+#### Why I lost the second mark...
+The second mark I decided to focus on was from *Project4*, where I did not make it so my digital story displayed for 5 seconds or longer using the **rep()** function with the **fps** argument.
+
+## What I did to gain those marks back
+#### What I did to redeem the first mark...
+To demonstrate that I could effectively use the **rename()** function, I decided to scrape data and use it to make a data frame with that information. Then I used the method demonstrated in the lab, by rewriting what I wanted the name of the data points to be, then giving the location of the column that I wanted renamed. This will be visible in the code snippets I attached to the project below.
+
+#### What I did to redeem the second mark...
+For the second mark I needed to make a gif to demonstrate I can make the frame rate play at 5 seconds per frame. This meant I had to need a gif somewhere in my project. To do this, I used the data I had scraped from the GoodReads site to make visualizations with the data. So I did just that. After creating what I believed were 5 meaningful visualizations from the data, I save them as .PNG images then proceeded to turn them into a gif that displayed each plot for 5 seconds. I did  this using the method described in the lectures, with the rep() function, with the argument of 5 to make it repeat 5 times. Then I set the fps to 1, so each frame would repeat 5 times with an fps of 1, making each frame last 5 seconds. This is shown in the code I have attached below from the R files where I did the work.
+
+
+## My Gif that shows for 5s
+![plots](plots.gif)
+
+## Some observations about the plots
+#### What I observed from the plots...
+When plotting the number of ratings against the average rating we can observe a small gradual increase in average rating due to the geom_smooth function showing the mean line slightly increasing as the number of ratings increases. showing that there may be a small positive correlation that more reviews may lead to a higher average rating.
+
+Plot 2 showed the distribution of rating count. It shows that a book in this list of "Best Books of 2023" is most likely to have a rating count from 0-200000, with some extreme outliers having over 1.6m reviews.
+
+The next plot showed that there was an slight increase (shown by the geom_smooth() mean line) in the average rating as the number of words in the title of the book increased. This was very interesting to me as I did not believe that these two variables would have any correlation. 
+
+The fourth plot showed little to no relationship between average rating and the count of letters in the authors name. Initially, I did not compare these variables - but after viewing the somewhat clear correlation with title length and rating I though I should see if there was.
+
+The fifth and final plot I created was the most interesting to me. It is a box plot that compares the authors status as either a GoodReads author or not. This was compared against the average rating the book by that author recieved. From this plot we can see that top quarter of the Non-GoodReads Author authors was below the mean line of those that were GoodReads Authors average rating. This shows a potential difference between the distributions of the two groups in the average ratings of books by GoodReads authors compared to non-GoodReads authors. This suggests there may be a benefit to a books ratings if the author is shown as a GoodReads author. What may go into the cause of such as extra promotion or something else would require further research.
+
+#### Possible errors or misleading things in the plots...
+The biggest misleading factor about the plots would be whenever I use the rating given to a book as a factor in the plot. This is because as I used a highly rated list of books, the difference between the ratings of the books is quite narrow. So on the graph the range makes any difference appear much more effectual that it would if the range was the full 0-5 star rating that is possible on goodreads.  
+
+This means that any conclusion I may draw from the data will not apply to any book on goodreads, merely highly rated ones. If may more broadly have applied if I had taken a random sample as opposed to a "best books" list. 
+
+## Things I used that may be outside course content
+These are the things I used in my code that may be outside of course content or not, in all honesty it is somewhat difficult to recall what I used from the course and what I have come to understand from my own research. 
+
+I did use regex for this project for the cleaning of my data. I used websites such as: https://stringr.tidyverse.org/reference/str_extract.html for the understanding of what regex patterns I needed to use to extract the information I needed. I built on my understanding from the course like getting scraped data, to learn how to clean up such data so that it may be much easier to analyse in the way I desired. 
+
+The other main thing I wasn't sure if the course covered was the use of the geom_smooth() function. This was one of the most helpful tools I used in this project and made the observation of possibly minor trends much easier to identify. I used the method = lm (linear model) argument to get a straight line fitted to the data.
+
+## Code I used to Scrape
+```{r file='exploration.R'}
+
+```
+
+## Code I used to create graphs and the GIF
+```{r file='graphs.R'}
+
+```
+

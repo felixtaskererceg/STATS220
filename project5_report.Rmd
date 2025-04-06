@@ -1,0 +1,82 @@
+---
+title: "Project 5"
+author: "Felix Tasker-Erceg"
+date: "2024-05-19"
+subtitle: "Creating data from digital sources"
+output:
+  html_document:
+    code_folding: hide
+---
+```{css echo=FALSE}
+body {
+  font-family: "Georgia";
+  background-color: #f2e6bf; /* Background color */
+  color: #794A3A; /* Text color */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #794A3A; /* Heading text color */
+}
+
+p {
+  color: #794A3A; /* Paragraph text color */
+}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+## Part A
+#### The Data Context I explored in Part A...
+The Data Context I explored in Part A centered around one of my favorite pastimes, the avid consumption of movies. Many sites offer ways to review and critique films, two of the most popular being Amazon's IMDb, and Rotten Tomatoes. Recalling this, I thought it would be very interesting if I could look at the grouped data of the highest rated films, exploring to see any similarities in highly rated films - or extreme outliers (which would be just as interesting). Looking at both IMDb's and Rotten Tomatoes' robots.txt file, I found neither to disallow the use of the pages containing the data I wanted to look at. I then looked at IMDb's terms and conditions as it is my preferred website and found clarity on the use (outlined in Part A comments).
+
+I chose this topic as not only did it interest me, but also IMDb is a site built for gathering data from thousands of people. This means it had a good database, and by scraping that data, I could analyse and compare features of the data that is not compared on the site. For example, just from the information I gathered with my scraping, I could compare rating vs run time, nchar in title vs year of release, number of reviews vs age rating, to just name a few. This could possibly allow a statistical insight as to what makes a movie more likely to be higher rated, not only within that list, but for all movies. I found that very, very exciting. (Which led to me messing with the data quite a bit to see I could find any such clear revelations).
+
+#### The code chunk...
+```{r file='partA.R'}
+
+```
+
+## Part B
+#### The code chunk...
+```{r file='partB.R', results='hide'}
+
+```
+#### What I learned about the text features of Dr Shane Reti's releases...
+
+
+
+Average Title Length: The average number of characters per title is `r title_mean_char`.
+
+Most Common Words: The top 10 interesting words found in the releases, excluding common words I removed as I found them of no particular significance, are:
+`r top_10_interesting`.
+
+Average Number of Words per Release: On average, each release contains approximately `r mean_words_content` words.
+
+Lexical Diversity: The ratio of unique words to the total number of words, indicating a unique word ratio, is calculated as `r unique_word_ratio`.
+
+## Part C
+
+```{r file='partC.R'}
+
+```
+
+#### One sentance that my visualisation reveals...
+I chose three key words that I believe represented highly differing components of government, all of much importance, and I found that the trends differed highly from what I expected except for the spike from the recession; I believed talk of climate would increase in speeches, COVID would cause a spike in healthcare talk, and economy wouldn't be absurdly more prominent in speeches - teaching me, somewhat shockingly, that for better or worse, economy is at the forefront of the issues attended to in speeches from those leading New Zealand for many years over topics such as healthcare and climate, until very recently!
+
+## Learning reflection
+#### **One** important idea I learned from module 5...
+The topic of web scraping is the most interesting and useful thing I have learnt from any paper I have taken yet. It gives real world, somewhat limitless, exploration of the biggest data set possible- the internet. This allows so much more exploration of various topics and I believe ties together many of the skill we have learnt so far with a neat bow, letting us create our own data sets from pages that we can explore as much as we wish. Explore with the other skill we have learnt prior. So for me it would definitely be the use of the rvest package.
+
+#### I want to explore further...
+The things I want to explore further is simply the application of scraping data and seeing what I can gather from that. The speech data is honestly mind blowing in how you can create a clear visualisation using keywords to show at a glance what politicians may be over/under valuing in their speeches (depending on opinion of course). A much more basic and possibly less important exploration I did myself after scraping IMDb data was to view the possible attributes that could lead to a higher score, such as run time and age rating. Honestly, at the risk of sounding excessive, it makes statistics feel like the tangible thing it always was meant to feel like, instead of the pre-generated static analysis of (sometimes irrelevant) uninteresting data that had been my experience prior.
+
+
+
+## Self review
+
+#### The skills I have developed when I look back on the course
+The use of R to analyse data has taught me a great number of things. Most importantly though in my opinion, it has taught me to view statistics in a very different way than I used to. I saw data as much more inaccessible, something that had to be surveyed for, or was kept by groups of people for personal use, not something I could look at and learn myself. The ability to gather my own data from a range of sources is the skill I most cherish from this course. That new ability is closely followed by the possibility of visualising that data in a compact and quickly interpretable way.
+
+The most broad learning outcome of undertaking a broad variety of data science challenges using R is the learning outcome I believe best describes my experience in the course. Because there were a great number of data challenges that I worked through using a coding language, making me appreciate both R and statistics more. As a CompSci major, this was something I was somewhat nervous to approach, thinking my enjoyment of the coding aspect would carry me through the course, I was very wrong. The data analysis side so much more interesting to me, and has prompted me to consider adjusting my course plan to explore the topic further.

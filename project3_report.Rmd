@@ -1,0 +1,199 @@
+---
+title: "Project3_report"
+author: "Felix Tasker-Erceg"
+date: "2024-04-17"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+library(jsonlite)
+library(magick)
+```
+
+```{css}
+body {
+  font-family: "Impact";
+  color: white;
+  background-color: #000000;
+}
+
+```
+
+
+## Introduction
+
+#### Explanation of my chosen search words: 
+
+For this project I chose the search words **happy Wildlife**. I chose these words as they somewhat conflict with each other in what I predict they will produce. To explain what I mean, the word *happy* is a descriptor words of what is considered a very human expressive emotion, one that can be easily captured by a portrait image. Because of this I was curious to see if it produced more portraits of the wildlife, as opposed to the more nature based landscape shots.
+
+On the other hand the word *wildlife* would return (working solely on my personal assumptions) more images of landscape orientation, as wildlife is found in nature. So I chose these words almost to see which word had greater effect on the orientation. Thirdly, who wouldn't want to look at happy animals for their whole project?
+
+#### Image of first few rows
+![](top_photos.png)
+
+#### Three different examples of features I noticed:
+
+1. There is a very linear relationship between likes and view with the data.
+
+2. According to the medians of likes and views, there is approximately 1 like for every 183 views of a photo.
+
+3. Of my 50 selected photos from when I originally viewed the data on pixabay, there appeared to be considerably more pictures of humans in my selected 50 than I intially viewed, making me belive the search resulting in humans is much more likely than expected.
+
+#### Gif cycling through some examples of features I had observesed from my search:
+This Gif will cycle through examples of animals being parents, small animals and baby animals, and a few examples of the disproportionate number of cats returned from the search. Please observe also that all these images are in landscape orientation.
+```{r gif_code_for_animals}
+# creating each frame, where the text comes from the counts vector an appears both below and above on each image using pipes
+frame0 <- image_read("monkey_parent.jpg")
+
+frame1 <- image_read("lemur_parent.jpg")
+  
+frame2 <- image_read("zebra_parent.jpg")
+  
+frame3 <- image_read("piglets.jpg")
+
+frame4 <- image_read("piglet2.jpg")
+
+frame5 <- image_read("rodent.jpg")
+
+frame6 <- image_read("squirrel.jpg")
+
+frame7 <- image_read("burds.jpg")
+
+frame8 <- image_read("ducks.jpg")
+
+frame9 <- image_read("cat.jpg")
+
+frame10 <- image_read("cat2.jpg")
+  
+frame11 <- image_read("cat3.jpg")
+
+
+# putting the frames in order using a vector
+frames <- c(frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11)
+
+# creating an animation
+image_animate(frames, fps = 1)
+
+
+```
+
+#### Displaying HTML Table
+```{r displaying photo URLS}
+json_data <- fromJSON("pixabay_data.json")
+pixabay_photo_data <- json_data$hits
+
+selected_photos <- pixabay_photo_data %>%
+  select(id, previewURL, pageURL, views, likes, downloads)
+
+selected_photos <- selected_photos %>%
+  slice(1:50)
+
+#selecting just the URLs from selected_photos
+url_table <- selected_photos %>%
+  select(pageURL)
+
+#displaying the HTML table using knitr::kable()
+html_table <- knitr::kable(url_table, format = "html")
+
+#output the table
+html_table
+
+```
+
+#### Gif of selected Images (and other exploration R code)
+```{r explorated, echo=TRUE}
+library(tidyverse)
+library(jsonlite)
+library(magick)
+json_data <- fromJSON("pixabay_data.json")
+pixabay_photo_data <- json_data$hits
+
+
+#selecting relevant variables and creating new ones
+selected_photos <- pixabay_photo_data %>%
+  select(id, previewURL, pageURL, views, likes, downloads) %>%
+  mutate(
+    popularity = case_when(
+      likes >= 5000 ~ "High",
+      likes >= 2000 ~ "Moderate",
+      likes >= 1000 ~ "Low",
+      TRUE ~ "Very Low"
+    ),
+    download_status = case_when(
+      downloads >= 300 ~ "Very High",
+      downloads >= 200 ~ "High",
+      downloads >= 100 ~ "Moderate",
+      TRUE ~ "Low"
+    ),
+    random_variable = sample(c("A", "B", "C", "D"), n(), replace = TRUE)
+  )
+
+#filtering to select only 50 photos
+selected_photos <- selected_photos %>%
+  slice(1:50)
+
+#saving selected_photos as a CSV file
+write.csv(selected_photos, "selected_photos.csv", row.names = FALSE)
+
+#calculating summary values
+mean_likes <- selected_photos$likes %>% mean(na.rm = TRUE)
+median_views <- selected_photos$views %>% median(na.rm = TRUE)
+total_downloads <- selected_photos$downloads %>% sum(na.rm = TRUE)
+
+#grouping by popularity and calculating summary values for views
+views_summary <- selected_photos %>%
+  group_by(popularity) %>%
+  summarise(mean_views = mean(views, na.rm = TRUE),
+            median_views = median(views, na.rm = TRUE),
+            total_photos = n())
+
+#creating an animated GIF
+frames <- lapply(selected_photos$previewURL, image_read)
+my_gif <- image_animate(image_join(frames), fps = 2)
+my_gif
+
+
+```
+
+## Key features of selected photos
+
+1. The mean number of likes for the selected photos is `r round(mean(selected_photos$likes), 2)`.
+
+2. The median number of views for the selected photos is `r median(selected_photos$views, na.rm = TRUE)`.
+
+3. The total number of downloads for the selected photos is `r sum(selected_photos$downloads, na.rm = TRUE)`.
+
+4. The most common popularity level among the selected photos is Moderate, with a total of `r max(views_summary$total_photos)` photos falling into this category.
+
+## Creativity
+
+#### What did I do to go above and beyond?
+For this creativity section I decided to plot a graph showing the likes vs views correlation for my 50 selected photos. This demonstrats how the two variables are related. I chose these two variables as they showed the side of human interaction with the photos (instead of concrete fact like size of the images), and the correlation of the two interested me. This graph visualised the expectedly linear correlation of the two statistics. Additionally, I also used the initial setup to colour the HTML black and white for impact.
+
+```{r creativity}
+#additional creative task: creating a plot of distribution of download status
+#plotting views versus likes
+ggplot(selected_photos, aes(x = views, y = likes)) +
+  geom_point(color = "DARK GREEN") +
+  labs(title = "Views vs Likes",
+       x = "Views",
+       y = "Likes")
+```
+
+## Learning reflection
+
+In this module, I gained a deeper understanding of how to effectively create brand new variables based on the already existing ones, using functions like mutate() in the tidyverse ecosystem. This allowed for the creation of more informative and relevant variables that can enhance the analysis of the data. Further, other small learnings such as visualising the HTML links for each of my photos are some interesting, more minor features that I did not expect to be a part of this language. Overall, understanding how to create new variables and manipulate data tables is very useful for performing data analysis and drawing conclusions from data.
+ 
+I would like to explore large data sets more, seeing what conclusions I can draw from the tools I have learned. For me, this steamlines statistics from what I knew it to be in High School, making it so much more interesting (genuinely).
+ 
+## Appendix
+
+```{r file='exploration.R', eval=FALSE, echo=TRUE}
+
+```
+
+![](end meme image.jpg)
