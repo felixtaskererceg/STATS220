@@ -1,0 +1,184 @@
+---
+title: "Creating images with R"
+author: "Felix Tasker-Erceg"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+library(magick)
+```
+
+```{css}
+body {
+  font-family: "Times New Roman";
+  color: white;
+  background-color: #6b422b;
+}
+
+```
+
+
+## Project requirements
+
+To meet the requirements regarding GitHub, I wrote about *why* I chose
+this course as well as important information that someone may want to
+know about the course.
+
+This important information includes: 
+
+- Link to course outline. 
+- Percentage obtained from each task within the course. 
+- Capabilities
+developed within the course. 
+- A short blurb explaining the purpose of
+the repo.
+
+I carefully followed the criteria of the assignment, making sure to hit the key points I have to use as well as personal touch and creativity. I struggled with timing but it led to me making a final product that is much better than I originally created. I used a already existing meme based on a statistical joke and improved on it considerably.
+
+**My Website (profile) link:** https://github.com/felixtaskererceg
+
+**Link to repo:** https://github.com/felixtaskererceg/STATS220
+
+![Screenshot of Folder](project_folder_ss.png)
+
+![Inspo Meme](inspo_meme.jpg)
+
+## My meme
+
+```{r meme-code, eval=TRUE}
+library(magick)
+
+#I have selected a statistics meme that uses wordplay and the film Mean Girls. 
+
+#First Image
+mean_girl_on_phone <- image_read("frame_0.gif") %>% 
+  image_scale(500)
+
+#Square adjacent first image
+meme_text1 <- image_blank(width = 300, 
+                          height = 280, 
+                          color = "#FF69B4") %>%
+  image_annotate(text = "Average people \n can...",
+                 color = "#FFFFFF",
+                 size = 40,
+                 font = "Impact",
+                 gravity = "Center")
+
+#Second Image
+mean_girl_off_phone <- image_read("frame_10.gif") %>% 
+  image_scale(500)
+
+#Square adjacent to second image
+meme_text2 <- image_blank(width = 300, 
+                          height = 280, 
+                          color = "#FF69B4") %>%
+  image_annotate(text = "...often be mean.",
+                 color = "#FFFFFF",
+                 size = 40,
+                 font = "Impact",
+                 gravity = "Center") %>%
+  image_annotate(text = "Get it? Because average is the mean... and mean girls... (raucous laughter)",
+                 color = "#FFFFFF",
+                 size = 9,
+                 font = "Impact",
+                 gravity = "SouthEast")
+
+#joining top row
+top_row <- image_append(c(mean_girl_on_phone, meme_text1))
+
+#joining bottom row
+bottom_row <- image_append(c(mean_girl_off_phone, meme_text2))
+
+#create vector
+meme_vector <- c(top_row, bottom_row)
+
+#join both rows
+image_append(meme_vector, stack = TRUE)
+
+
+```
+
+
+
+
+```{r animation-code, eval=FALSE}
+
+# creating each frame, where the text comes from the counts vector an appears both below and above on each image using pipes
+frame0 <- image_read("frame_0.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FF69B4")
+
+frame1 <- image_read("frame_1.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FFFFFF")
+  
+frame2 <- image_read("frame_2.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FFFFFF")
+  
+frame3 <- image_read("frame_3.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FF69B4")
+  
+frame4 <- image_read("frame_4.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FF69B4")
+
+frame5 <- image_read("frame_5.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FFFFFF")
+
+frame6 <- image_read("frame_6.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FFFFFF")
+
+frame7 <- image_read("frame_7.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FF69B4")
+  
+frame8 <- image_read("frame_8.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FF69B4")
+
+frame9 <- image_read("frame_9.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FFFFFF")
+  
+frame10 <- image_read("frame_10.gif") %>%
+  image_annotate(text = "AVERAGE PEOPLE CAN", size = 50, gravity = "North", color = "#FF69B4") %>% 
+  image_annotate(text = "OFTEN BE MEAN...", size = 50, gravity = "South", color = "#FFFFFF")
+
+# putting the frames in order using a vector
+frames <- c(frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10)
+
+# creating an animation
+image_animate(frames, fps = 5)
+
+
+```
+
+## Creativity
+
+![meme_gif](my_meme.gif)
+
+For creativity, I wanted to explore the effects and possible applications of the animation function in the magick package.
+
+To do this I first experimented will alternating the colors of the text in the meme. However, this change to no create the effect I desired. To account for this I upped the amount of frames I had from 4 to 11, to give me more room to work with on the gif. Ultimately I felt that changing the colors too much was not pleasing to eye. So I returned the color change back to a simple flip between white and hot-pink on every second frame.
+
+The added benefit of this change though was I got to more smoothly demonstrate the expression of the "mean girl" in the gif. This made for a much better effect in my opinion.
+
+
+Another creative factor I employed was the clean use of sub-headings and emojis in the GitHub page.
+
+
+## Learning reflection
+
+The important ideas I learned from this initial section of STATS 220 are actually more organisational and assumptive learnings that I have taken away.
+
+I made the intense initial error of assuming my prior knowledge of code would help me complete the project in a shorter planned time. However, as I biased other assignment due to this self imposed false confidence - I left it too late and drastically underestimated my skill set in a different language. 
+
+Besides that... I really enjoyed working with images in a coding language. It is something completely new to me and seems like such a valid and useful skill.
