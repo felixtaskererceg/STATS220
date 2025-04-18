@@ -7,11 +7,11 @@ This repository contains RMarkdown reports from several data analysis projects c
 | Project | Description | View Report |
 |--------|-------------|-------------|
 | **Project 1** | Image generation in R | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project1_report.html) |
-| **Project 2** | [Analysing Personally collected exercise data] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project2_report.html) |
-| **Project 3** | [Comparing pixabay search results for two variables | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project3_report.html) |
+| **Project 2** | Analysing Personally collected exercise data | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project2_report.html) |
+| **Project 3** | Comparing pixabay search results for two variables | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project3_report.html) |
 | **Project 4** | Visualising YouTube video data (Using *Kurzgesagt* and *Vox*) | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project4_report.html) |
-| **Project 5** | [Creating data from digital sources] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project5_report.html) |
-| **Redemption Project** | [Comparing GoodReads Statistics (Scraping & Analysing)] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/redemption_report.html) |
+| **Project 5** | Creating data from digital sources | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project5_report.html) |
+| **Redemption Project** | Comparing GoodReads Statistics (Scraping & Analysing) | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/redemption_report.html) |
 
 ---
 
