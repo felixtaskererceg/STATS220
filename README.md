@@ -1,4 +1,23 @@
-# **STATS220** - *Semester 1 2024* :books:
+# Statistics Projects
+
+This repository contains RMarkdown reports from several data analysis projects completed as part of STAT220. Each report is rendered as an interactive HTML file and can be viewed online via GitHub Pages.
+
+## 📊 Project Reports
+
+| Project | Description | View Report |
+|--------|-------------|-------------|
+| **Project 1** | Image generation in R | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project1_report.html) |
+| **Project 2** | [Insert your own title/description here] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project2_report.html) |
+| **Project 3** | [Insert your own title/description here] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project3_report.html) |
+| **Project 4** | Visualising data about YouTube channels *Kurzgesagt* and *Vox* | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project4_report.html) |
+| **Project 5** | [Insert your own title/description here] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/project5_report.html) |
+| **Redemption Project** | [Insert your own title/description here] | [View HTML](https://felixtaskererceg.github.io/Statistics-Projects/redemption_report.html) |
+
+---
+
+*All reports are written in R Markdown and knitted to HTML using the `rmarkdown` package.*
+
+
 ### What is the purpose of this repo? :computer:
 The purpose of this repo is to demonstrate and save the work I have done for the paper of STATS 220. Throughout the semester, we will have many projects to complete, and this repo will act as a way to display such projects.
 
